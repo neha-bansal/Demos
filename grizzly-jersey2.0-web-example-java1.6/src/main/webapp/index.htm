@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Insert title here</title>
+<script type="text/javascript" src="application.js"></script>
+<script type="text/javascript">
+function getResponse() {
+	alert("getResponse called");
+	var xhr = new XMLHttpRequest();
+	alert("xhr object......"  + xhr);
+	xhr.open("GET", "./rest/test/async", true);
+	//xhr.timeout = 1000;
+	//xhr.ontimeout = function () {
+	//	alert("timeout!!!");
+	//}
+	xhr.onprogress = function () {
+		document.getElementById("myDiv").innerHTML= "PROGRESS: " + xhr.responseText;
+	}
+	xhr.onreadystatechange = function () {
+	    if ((xhr.readyState === 4) && (xhr.status === 200))
+	    	alert("PROGRESS completed");
+	};
+	xhr.send();
+	alert("getResponse ended");
+}
+
+function getResponseFromOtherDomain(url) {
+	alert("getResponseFromOtherDomain called");
+	var xhr = new XMLHttpRequest();
+	alert("xhr object......"  + xhr);
+	xhr.open("GET", "./otherDomain", true);
+	xhr.setRequestHeader("domain-url", url);
+	xhr.onprogress = function () {
+		document.getElementById("myDiv").innerHTML= "PROGRESS: " + xhr.responseText;
+	}
+	xhr.onreadystatechange = function () {
+	    if ((xhr.readyState === 4) && (xhr.status === 200))
+	    	alert("PROGRESS completed");
+	};
+	xhr.send();
+	alert("getResponseFromOtherDomain ended");
+}
+
+function formatResponse(data) {
+	alert("called");
+	console.log(data);
+}
+
+</script>
+<!-- <script type="text/javascript" src="http://10.160.161.108:12000/TestGroups/demo/h?callback=formatResponse"></script> -->
+</head>
+<body>
+
+<input type="submit" name="Chunked response" value="Chunked response" onclick="getResponse()"/>
+<input type="submit" name="Chunked response" value="response from Other Domain" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/test/async')"/>
+<input type="submit" name="Chunked response" value="Chunked response from Other Domain" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/TestGroupExecution/demo/startTest/h')"/>
+<div id="myDiv"></div>
+<div id="missing-sockets">Your browser does not support websockets.</div>
+<input type="button" name="connect websocket" value="connect websocket" onclick="app.connect()"/>
+<iframe id="websockets-frame" style="display: none;"></iframe>
+</body>
+</html>
