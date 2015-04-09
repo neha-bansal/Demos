@@ -53,7 +53,7 @@ import org.glassfish.grizzly.websockets.WebSocketEngine;
  */
 public class ChatWebSocketServer {
     // the port to listen on
-    public static final int PORT = 8080;
+    public static final int PORT = 2222;
     
     public static void main(String[] args) throws Exception {
         // Server expects to get the path to webapp as command line parameter

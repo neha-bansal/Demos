@@ -39,12 +39,21 @@ var app = {
             // Web Socket is connected. You can send data by send() method
             websocket.send('login:' + name);
         };
-        websocket.onmessage = function (evt) {
-            eval(evt.data);
-            $('message').disabled = false;
-            $('post-button').disabled = false;
-            $('message').focus();
-            $('message').value = '';
+        websocket.onmessage = function (data) {
+            //eval(evt.data);
+//            $('message').disabled = false;
+//            $('post-button').disabled = false;
+//            $('message').focus();
+//            $('message').value = '';
+        	alert("websocket.onmessage");
+            alert(data);
+            //Object data = evt.data;//new Object (evt.data);
+            var p = document.createElement('p');
+            var ptext = document.createTextNode(data);
+            // p.innerHTML = data.name + ': ' + data.message;
+            p.appendChild(ptext);
+            $('display').appendChild(p);
+            new Fx.Scroll('display').down();
         };
         websocket.onclose = function() {
             var p = document.createElement('p');

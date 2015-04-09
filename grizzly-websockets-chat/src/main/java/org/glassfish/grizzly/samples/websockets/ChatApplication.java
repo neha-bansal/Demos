@@ -137,7 +137,7 @@ public class ChatApplication extends WebSocketApplication {
         logger.log(Level.INFO, "Broadcasting: {0} from: {1}", new Object[]{text, user});
         final String jsonMessage = toJsonp(user, text);
         
-        broadcaster.broadcast(members, jsonMessage);
+        broadcaster.broadcast(members, "{msg: \"" + escape(text) + "\"}");
     }
 
     /**
