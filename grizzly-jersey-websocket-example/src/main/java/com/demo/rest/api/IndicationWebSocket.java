@@ -9,7 +9,7 @@ public class IndicationWebSocket extends DefaultWebSocket {
 
 	public IndicationWebSocket(ProtocolHandler handler,
 			HttpRequestPacket requestPacket, WebSocketListener... listeners) {
-		super(handler, null, listeners);
+		super(handler, requestPacket, listeners);
 	}
 
 	

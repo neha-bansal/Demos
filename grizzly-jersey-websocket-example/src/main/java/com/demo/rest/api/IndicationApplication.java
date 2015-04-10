@@ -1,7 +1,5 @@
 package com.demo.rest.api;
 
-import java.io.IOException;
-
 import org.glassfish.grizzly.http.HttpRequestPacket;
 import org.glassfish.grizzly.websockets.DataFrame;
 import org.glassfish.grizzly.websockets.ProtocolHandler;
@@ -11,10 +9,15 @@ import org.glassfish.grizzly.websockets.WebSocketListener;
 
 public class IndicationApplication extends WebSocketApplication {
 
-	public void onMessage(IndicationWebSocket websocket, String frame)
-			throws IOException {
-		System.out.println("onMessage called.....");
-		
+	public void onMessage(WebSocket websocket, String frame) {
+		System.out.println("onMessage called.....with " + frame);
+		websocket.send("server send : " + frame + "received");
+		try {
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		websocket.send("server send : " + frame + "received again");
 	}
 	
 	@Override

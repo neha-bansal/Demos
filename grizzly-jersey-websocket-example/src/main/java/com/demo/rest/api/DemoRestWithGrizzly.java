@@ -20,7 +20,7 @@ public class DemoRestWithGrizzly {
 	public static void main(String[] args) {//throws IllegalArgumentException, IOException {
 		//URI baseUri = UriBuilder.fromUri(arg0);
 		try {
-		String uri = "http://localhost:1111/";
+		String uri = "http://localhost:2222/";
 		Map<String, String> initParams = new HashMap<String, String>();
 		//initParams.put("com.sun.jersey.config.property.packages", "com.demo.rest.api.webservice");
 		initParams.put("jersey.config.server.provider.packages", "com.demo.rest.api.webservice");
@@ -30,14 +30,19 @@ public class DemoRestWithGrizzly {
 		
 		HttpServer selectorThread = GrizzlyWebContainerFactory.create(uri, ServletContainer.class, initParams);
 		
-		selectorThread.getListener("grizzly").registerAddOn(new WebSocketAddOn());
+		final HttpServer server = HttpServer.createSimpleServer("", 1111);
+		
+		server.getListener("grizzly").registerAddOn(new WebSocketAddOn());
 		
 		IndicationApplication app = new IndicationApplication();
 		
-		WebSocketEngine.getEngine().register("", "chat", app);
+		WebSocketEngine.getEngine().register("/websocket", "/indication", app);
+		server.start();
 
 		System.in.read();
+		
 		selectorThread.stop();
+		server.stop();
 		System.out.println("Stopping grizzly...");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
