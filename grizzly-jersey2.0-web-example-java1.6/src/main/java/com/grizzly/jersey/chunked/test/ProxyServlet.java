@@ -21,8 +21,8 @@ public class ProxyServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	
-	protected void doGet1(HttpServletRequest req, HttpServletResponse resp)
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
 		System.out.println("doGet called  : ");
@@ -53,8 +53,8 @@ public class ProxyServlet extends HttpServlet {
 		
 	}
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	
+	protected void doGet1(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
 		System.out.println("doGet called  : ");

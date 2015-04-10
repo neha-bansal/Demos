@@ -1,63 +1,81 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE >
+<html >
 <head>
 <title>Insert title here</title>
 <script type="text/javascript" src="application.js"></script>
 <script type="text/javascript">
 function getResponse() {
-	alert("getResponse called");
+	//alert("getResponse called");
+	removeNotifications();
 	var xhr = new XMLHttpRequest();
-	alert("xhr object......"  + xhr);
+	//alert("xhr object......"  + xhr);
 	xhr.open("GET", "./rest/test/async", true);
 	//xhr.timeout = 1000;
 	//xhr.ontimeout = function () {
 	//	alert("timeout!!!");
 	//}
 	xhr.onprogress = function () {
-		document.getElementById("myDiv").innerHTML= "PROGRESS: " + xhr.responseText;
-	}
+		appendMessages("PROGRESS: " + xhr.responseText);
+	};
 	xhr.onreadystatechange = function () {
-	    if ((xhr.readyState === 4) && (xhr.status === 200))
-	    	alert("PROGRESS completed");
+	    if ((xhr.readyState === 4) && (xhr.status === 200)) {
+	    	//alert("PROGRESS completed");
+	    	appendMessages("PROGRESS: COMPLETED");
+	    }
 	};
 	xhr.send();
-	alert("getResponse ended");
+	//alert("getResponse ended");
 }
 
 function getResponseFromOtherDomain(url) {
-	alert("getResponseFromOtherDomain called");
+	//alert("getResponseFromOtherDomain called");
+	//removeNotifications();
 	var xhr = new XMLHttpRequest();
-	alert("xhr object......"  + xhr);
+	//alert("xhr object......"  + xhr);
 	xhr.open("GET", "./otherDomain", true);
 	xhr.setRequestHeader("domain-url", url);
 	xhr.onprogress = function () {
-		document.getElementById("myDiv").innerHTML= "PROGRESS: " + xhr.responseText;
-	}
+		appendMessages("PROGRESS: " + xhr.responseText);
+	};
 	xhr.onreadystatechange = function () {
-	    if ((xhr.readyState === 4) && (xhr.status === 200))
-	    	alert("PROGRESS completed");
+	    if ((xhr.readyState === 4) && (xhr.status === 200)) {
+	    	//alert("PROGRESS completed");
+	    	appendMessages("PROGRESS: COMPLETED");
+	    }
 	};
 	xhr.send();
-	alert("getResponseFromOtherDomain ended");
+	//alert("getResponseFromOtherDomain ended");
 }
 
-function formatResponse(data) {
+function removeNotifications() {
+	var parent = document.getElementById("myDiv")
+	var childList = document.getElementsByTagName("p");
+	var length = childList.length;
+	for (i=0; i < length; i++) {
+		parent.removeChild(childList[i]);
+	}
+}
+/* function formatResponse(data) {
 	alert("called");
 	console.log(data);
-}
+} */
 
 </script>
 <!-- <script type="text/javascript" src="http://10.160.161.108:12000/TestGroups/demo/h?callback=formatResponse"></script> -->
 </head>
 <body>
 
-<input type="submit" name="Chunked response" value="Chunked response" onclick="getResponse()"/>
-<input type="submit" name="Chunked response" value="response from Other Domain" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/test/async')"/>
-<input type="submit" name="Chunked response" value="Chunked response from Other Domain" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/TestGroupExecution/demo/startTest/h')"/>
+<input type="submit" name="Response from saim domain" value="Response from saim domain" onclick="getResponse()"/><br/><br/>
+<input type="submit" name="Test Other Domain" value="Test Other Domain" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/test/async')"/><br/><br/>
+<input type="submit" name="Start Test (chunked)" value="Start Test (chunked)" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/TestGroupExecution/demo/startTest/h')"/>
+<input type="submit" name="Stop Test (chunked)" value="Stop Test (chunked)" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/TestGroupExecution/demo/stopTest/h')"/><br/><br/>
+<input type="button" name="connect websocket" value="connect websocket" onclick="app.connect()"/><br/><br/>
+<input type="submit" name="Start Test (websocket)" value="Start Test (websocket)" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/TestGroupExecutionWebsocket/demo/startTest/h')"/>
+<input type="submit" name="Stop Test (websocket)" value="Stop Test (websocket)" onclick="getResponseFromOtherDomain('http://10.160.161.108:12000/TestGroupExecutionWebsocket/demo/stopTest/h')"/><br/><br/>
+
 <div id="myDiv"></div>
-<div id="missing-sockets">Your browser does not support websockets.</div>
-<input type="button" name="connect websocket" value="connect websocket" onclick="app.connect()"/>
-<iframe id="websockets-frame" style="display: none;"></iframe>
+
+<div id="missing-sockets" style="display: none;">Your browser does not support websockets.</div>
+
 </body>
 </html>
