@@ -1,0 +1,66 @@
+<!-- Cross Domain Access demo -->
+ 
+ <!--  Cross domain data can be accessed with the following : JSONP, CORS and Proxy Servlet-->
+ 
+ <!-- Below is the demo of the JSONP and CORS -->
+ 
+ <!-- When a request is made to different domain, the server respond to that request but the browser do not let the response to be exposed to the browser.
+ if a simple POST request is made to the other domain then the data can be written on the server but the response will not be shown on the browser.-->
+ 
+ <!DOCTYPE >
+<html >
+<head>
+<title>Insert title here</title>
+<script type="text/javascript">
+function getResponse() {
+	var xhr = new XMLHttpRequest();
+	var url = document.getElementById("restUrl").value;
+	xhr.onload = function() { 
+		document.getElementById("myDiv").innerHTML = xhr.responseText;
+		}
+	xhr.onreadystatechange = function () {
+	    if ((xhr.readyState === 4) && (xhr.status === 200)) {
+	    	document.getElementById("myDiv").innerHTML = xhr.responseText;
+	    }
+	};
+	
+	xhr.open("POST", url, true);	 
+	//xhr.open("GET", url, false);
+	
+	//xhr.withCredentials=true;
+	
+	//xhr.setRequestHeader("Access-Control-Allow-Origin", "*");	//no need to add this header in request for CORS, browser handle it itself. it should be present at server side.
+	//xhr.setRequestHeader("Accept", "application/json");
+	xhr.setRequestHeader("Content-type", "application/json");
+	
+	//alert(JSON.stringify({msg:"hello"}));
+	xhr.send(JSON.stringify({msg:"hello"}));
+	//xhr.send('{"msg":"hello"}');
+	
+	//xhr.send();
+}
+
+</script>
+
+
+</head>
+<body>
+
+Enter url : <input type="text" id="restUrl" value="" />
+<input type="submit" name="Response from other domain" value="Response from other domain" onclick="getResponse()"/><br/><br/>
+
+<div id="myDiv"></div>
+
+</body>
+
+<script>
+    function myCallbackFunction(data){
+    	alert("myCallbackFunction called");
+    	document.getElementById("myDiv").innerHTML = data.street + " " + data.city;
+    }
+</script>
+
+<!-- JSONP can be used only for sending GET request to the other domain -->
+<script src="http://localhost:1111/JsonPResource/latest?callback=myCallbackFunction"></script>
+
+</html>

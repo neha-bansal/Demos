@@ -24,8 +24,8 @@ public class JsonPResource {
 	}
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON, "application/javascript"})
-	@JSONP
+	@Produces({/*MediaType.APPLICATION_JSON, */"application/javascript"})
+	@JSONP(queryParam="callback")
 	public List<AddressBean> getAddressBeanList() {
 		
 		return addressBeanList;
@@ -33,8 +33,8 @@ public class JsonPResource {
 	
 	@Path("/latest")
 	@GET
-	@Produces({MediaType.APPLICATION_JSON, "application/javascript"})
-	@JSONP(callback="javascript")
+	@Produces({/*MediaType.APPLICATION_JSON,*/ "application/javascript"})
+	@JSONP(queryParam="callback")
 	public AddressBean getLatestAddressBean() {
 		
 		return addressBeanList.get(addressBeanList.size() - 1);
