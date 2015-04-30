@@ -1,0 +1,327 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.maven.demo</groupId>
+	<artifactId>maven-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Maven-Demo</name>
+	<description>Demo project for maven build tool</description>
+	<properties>
+		<env.test_profile>test</env.test_profile>
+	</properties>
+
+
+	<profiles>
+		<profile>
+			<id>my.repo</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>my.repo</id>
+					<url>file:///C:\Aeroflex\Demos\git_repo\grizzly-jersey-websocket-example\target</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<!-- Activate profile from variables provoded at commend line -->
+				<property>
+					<name>test_profile</name>
+					<value>test</value>
+				</property>
+				<!-- Activate profile depending upon the file existence -->
+				<file>
+					<exists>target\classes\env.properties</exists>
+					<missing>target/generated-sources/axistools/wsdl2java/
+		 com/companyname/group</missing>
+				</file>
+				<!-- Activate profile depending on OS details -->
+				<os>
+					<name>Windows 7</name>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<test.prop>test profile used</test.prop>
+			</properties>
+			<!-- Activate profile from command line -->
+			<!-- <build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<id>id.test</id>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<echo>Using env.test.properties</echo>
+										<copy file="src/main/resources/env.test.properties"
+											tofile="${project.build.outputDirectory}/env.properties" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build> -->
+		</profile>
+		<profile>
+			<id>dev</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<id>id.test</id>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<echo>Using env.properties</echo>
+										<echo>${java.home}</echo>
+										<echo>${env.test_profile}</echo>
+										<copy file="src/main/resources/env.properties"
+											tofile="${project.build.outputDirectory}/env.properties" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<id>id.test</id>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<echo>Using env.prod.properties</echo>
+										<copy file="src/main/resources/env.prod.properties"
+											tofile="${project.build.outputDirectory}/env.properties" />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>id.pre-clean</id>
+						<phase>pre-clean</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>pre-clean phase from target</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>clean pahase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.post-clean</id>
+						<phase>post-clean</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>post clean pahase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>validate pahase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.process-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>process-resources
+									pahase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>compile pahase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>test phase</echo>
+								<echo>${test.prop}</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.package</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>package phase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>deploy phase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.pre-site</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>pre-site phase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.site</id>
+						<phase>site</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>site phase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.post-site</id>
+						<phase>post-site</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>post-site phase</echo>
+							</target>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.deploy-site</id>
+						<phase>deploy-site</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>deploy-site phase</echo>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<!-- need to add this info at project level. deploy does not work if added 
+		in the deploy configuration above -->
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>My Internal Repo</name>
+			<url>file:///C:/Aeroflex/Demos/Java/maven-demo/deploy/</url>
+		</repository>
+		<site>
+			<id>internal.repo</id>
+			<name>My Internal Site</name>
+			<url>file:///C:/Aeroflex/Demos/Java/maven-demo/deploy/</url>
+		</site>
+
+	</distributionManagement>
+
+	<!-- <dependencies> <dependency> <groupId>org.grizzly.jersey.example</groupId> 
+		<artifactId>grizzly-jersey-example</artifactId> <version>0.0.1-SNAPSHOT</version> 
+		</dependency> </dependencies> -->
+
+</project>
