@@ -6,8 +6,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Maven-Demo</name>
 	<description>Demo project for maven build tool</description>
+	<!-- <properties>
+	<test.name>from test property</test.name>
+	</properties> -->
 
 	<build>
+	<filters>
+	<filter>maven-filter.properties</filter>
+	</filters>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -43,6 +49,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.3</version>
 				<executions>
 					<execution>
 						<id>id.clean</id>
@@ -99,6 +106,158 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<outputDirectory>target/</outputDirectory>
+					<escapeString>\</escapeString>
+					<resources>
+						<resource>
+							<directory>src\java-resources</directory>
+							<targetPath>com/maven/demo/java</targetPath>
+							<filtering>true</filtering>
+							<includes>
+								<include>**/*.properties</include>
+							</includes>
+							<excludes>
+								<exclude>**/*Copy*</exclude> <!-- matches file name as case sensitive -->
+								<exclude>**/*.jpg</exclude> <!-- excludes the jpg files recursively -->
+							</excludes>
+						</resource>
+						<resource>
+							<directory>src\test-resources</directory>
+							<targetPath>com/maven/demo/test</targetPath>
+						</resource>
+					</resources>
+				</configuration>
+				<executions>
+					<execution>
+						<id>id.resources</id>
+						<phase>resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<id>id.java.resources</id>
+						<phase>resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src\java-resources</directory>
+									<targetPath>com/maven/demo/java</targetPath>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					
+					<execution>
+						<id>id.test.resources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>testResources</goal>
+						</goals>
+					</execution>
+				</executions>
+						<configuration>
+						<outputDirectory>target/</outputDirectory>
+							<testResources>
+								<testResource>
+									<directory>\src\test-resources</directory>
+								</testResource>
+							</testResources>
+						</configuration>
+			</plugin> -->
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<executions>
+					<execution>
+						<id>id.site-site</id>
+						<phase>site</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+					</execution>
+				</executions>
+						<configuration>
+							<generateProjectInfo>false</generateProjectInfo> this don't work if configuration is added under executions
+							<generateSitemap>true</generateSitemap>
+							<locales>en,fr</locales>
+						</configuration>
+			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<executions>
+					<execution>
+						<id>id.site-deploy</id>
+						<phase>site</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<skipDeploy>true</skipDeploy>
+						</configuration>
+					</execution>
+					<execution>
+						<id>id.site-jar</id>
+						<phase>site</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+						<configuration>
+							<jarOutputDirectory>site/</jarOutputDirectory> <!-- these are also not working under executions block -->
+						<finalName>maven-demo</finalName>
+						</configuration>
+			</plugin>
+			<plugin>
+				<groupId>sample.plugin</groupId>
+				<artifactId>hello-maven-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+				<configuration>
+				<outputDirectory>site/</outputDirectory>
+				<myArray>
+				<param>122</param>
+				<!-- <int>2</int>
+				<int>3</int>
+				<int>4</int> -->
+				</myArray>
+				<!-- <myMap>
+				<firstName>Neha</firstName>
+				<lastName>Bansal</lastName>
+				</myMap> -->
+				</configuration>
+				<executions>
+					<execution>
+						<id>id.hello</id>
+						<goals>
+							<goal>touch</goal>
+							<goal>sayhi</goal>
+							<goal>saygreet</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	
@@ -106,13 +265,13 @@
 		<repository>
 			<id>internal.repo</id>
 			<name>My Internal Repo</name>
-			<url>file:///C:/Aeroflex/Demos/Java/maven-demo/deploy/</url>
+			<url>file:///C:\Aeroflex\Demos\git_repo\maven-demo/deploy/</url>
 		</repository>
-		<!-- <site>
+		<site>
 			<id>internal.repo</id>
 			<name>My Internal Site</name>
-			<url>file:///C:/Aeroflex/Demos/Java/maven-demo/deploy/</url>
-		</site> -->
+			<url>file:///C:\Aeroflex\Demos\git_repo\maven-demo/site/</url>
+		</site>
 
 	</distributionManagement>
 	
