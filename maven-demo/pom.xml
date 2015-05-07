@@ -6,14 +6,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Maven-Demo</name>
 	<description>Demo project for maven build tool</description>
-	<!-- <properties>
-	<test.name>from test property</test.name>
-	</properties> -->
+	<!-- <properties> <test.name>from test property</test.name> </properties> -->
 
 	<build>
-	<filters>
-	<filter>maven-filter.properties</filter>
-	</filters>
+		<filters>
+			<filter>maven-filter.properties</filter>
+		</filters>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -26,13 +24,8 @@
 					<filesets>
 						<fileset>
 							<directory>deploy\</directory> <!-- relative path -->
-							<!-- <includes>
-								<include>*.pom.*</include>
-								<include>*.jar.*</include>
-							</includes>
-							<excludes>
-								<exclude>*.jar</exclude>
-							</excludes> -->
+							<!-- <includes> <include>*.pom.*</include> <include>*.jar.*</include> 
+								</includes> <excludes> <exclude>*.jar</exclude> </excludes> -->
 						</fileset>
 					</filesets>
 				</configuration>
@@ -71,16 +64,11 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
-					<!-- <compilerArgs>
-						<arg>-verbose</arg>
-						<arg>-Xlint:all,-options,-path</arg>
-					</compilerArgs>
-					<verbose>true</verbose>
-					<fork>true</fork>
-					<executable>C:\Program Files\Java\jdk1.7.0_75\bin\javac</executable>
-					<compilerVersion>1.3</compilerVersion> -->
+					<!-- <compilerArgs> <arg>-verbose</arg> <arg>-Xlint:all,-options,-path</arg> 
+						</compilerArgs> <verbose>true</verbose> <fork>true</fork> <executable>C:\Program 
+						Files\Java\jdk1.7.0_75\bin\javac</executable> <compilerVersion>1.3</compilerVersion> -->
 					<source>1.6</source>
-					<target>1.6</target> 
+					<target>1.6</target>
 				</configuration>
 				<executions>
 					<execution>
@@ -142,65 +130,23 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
-				<executions>
-					<execution>
-						<id>id.java.resources</id>
-						<phase>resources</phase>
-						<goals>
-							<goal>resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src\java-resources</directory>
-									<targetPath>com/maven/demo/java</targetPath>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					
-					<execution>
-						<id>id.test.resources</id>
-						<phase>package</phase>
-						<goals>
-							<goal>testResources</goal>
-						</goals>
-					</execution>
-				</executions>
-						<configuration>
-						<outputDirectory>target/</outputDirectory>
-							<testResources>
-								<testResource>
-									<directory>\src\test-resources</directory>
-								</testResource>
-							</testResources>
-						</configuration>
-			</plugin> -->
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.4</version>
-				<executions>
-					<execution>
-						<id>id.site-site</id>
-						<phase>site</phase>
-						<goals>
-							<goal>site</goal>
-						</goals>
-					</execution>
-				</executions>
-						<configuration>
-							<generateProjectInfo>false</generateProjectInfo> this don't work if configuration is added under executions
-							<generateSitemap>true</generateSitemap>
-							<locales>en,fr</locales>
-						</configuration>
-			</plugin> -->
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-resources-plugin</artifactId> 
+				<version>2.7</version> <executions> <execution> <id>id.java.resources</id> 
+				<phase>resources</phase> <goals> <goal>resources</goal> </goals> <configuration> 
+				<outputDirectory>target/</outputDirectory> <resources> <resource> <directory>src\java-resources</directory> 
+				<targetPath>com/maven/demo/java</targetPath> </resource> </resources> </configuration> 
+				</execution> <execution> <id>id.test.resources</id> <phase>package</phase> 
+				<goals> <goal>testResources</goal> </goals> </execution> </executions> <configuration> 
+				<outputDirectory>target/</outputDirectory> <testResources> <testResource> 
+				<directory>\src\test-resources</directory> </testResource> </testResources> 
+				</configuration> </plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> 
+				<version>3.4</version> <executions> <execution> <id>id.site-site</id> <phase>site</phase> 
+				<goals> <goal>site</goal> </goals> </execution> </executions> <configuration> 
+				<generateProjectInfo>false</generateProjectInfo> this don't work if configuration 
+				is added under executions <generateSitemap>true</generateSitemap> <locales>en,fr</locales> 
+				</configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -224,43 +170,99 @@
 						</goals>
 					</execution>
 				</executions>
-						<configuration>
-							<jarOutputDirectory>site/</jarOutputDirectory> <!-- these are also not working under executions block -->
-						<finalName>maven-demo</finalName>
-						</configuration>
+				<configuration>
+					<jarOutputDirectory>site/</jarOutputDirectory> <!-- these are also not working under executions block -->
+					<finalName>maven-demo</finalName>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>sample.plugin</groupId>
 				<artifactId>hello-maven-plugin</artifactId>
 				<version>1.0-SNAPSHOT</version>
 				<configuration>
-				<outputDirectory>site/</outputDirectory>
-				<myArray>
-				<param>122</param>
-				<!-- <int>2</int>
-				<int>3</int>
-				<int>4</int> -->
-				</myArray>
-				<!-- <myMap>
-				<firstName>Neha</firstName>
-				<lastName>Bansal</lastName>
-				</myMap> -->
+				<greeting>mujhe kaam milne wala hai... to main kya karun</greeting>
+					<!-- <outputDirectory>site/</outputDirectory>
+					<myArray>
+						<Integer>122</Integer>
+						<Integer>333</Integer>
+					</myArray>
+					<myMap>
+						<firstName>11</firstName>
+						<lastName>33</lastName>
+					</myMap>
+					<myProperties>
+						<property>
+							<name>fruit</name>
+							<value>healthy</value>
+						</property>
+						<property>
+							<name>junk food</name>
+							<value>unhealthy</value>
+						</property>
+						<age>young</age>
+						<address>dublin</address>
+					</myProperties>
+					<myObject> implementation="other.MyObject"  this is noe working...
+					<firstField>My new object</firstField>
+					</myObject> -->
 				</configuration>
 				<executions>
 					<execution>
-						<id>id.hello</id>
+						<id>id.hello.touch</id>
 						<goals>
 							<goal>touch</goal>
+						</goals>
+						<!-- <configuration>
+							<outputDirectory>site/</outputDirectory>
+						</configuration> -->
+						<!-- <phase>process-sources</phase> -->
+					</execution>
+					<execution>
+						<id>id.hello.sayhi</id>
+						<goals>
 							<goal>sayhi</goal>
+						</goals>
+						<phase>compile</phase>
+						<configuration>
+							<myArray>
+						<Integer>122</Integer>
+						<Integer>333</Integer>
+					</myArray>
+					<myMap>
+						<firstName>11</firstName>
+						<lastName>33</lastName>
+					</myMap>
+					<myProperties>
+						<property>
+							<name>fruit</name>
+							<value>healthy</value>
+						</property>
+						<property>
+							<name>junk food</name>
+							<value>unhealthy</value>
+						</property>
+						<age>young</age>
+						<address>dublin</address>
+					</myProperties>
+					<myObject> <!-- implementation="other.MyObject"  this is not working...-->
+					<firstField>My new object</firstField>
+					</myObject>
+						</configuration>
+						<!-- <phase>process-sources</phase> -->
+					</execution>
+					<execution>
+						<id>id.hello.saygreet</id>
+						<goals>
 							<goal>saygreet</goal>
 						</goals>
-						<phase>process-sources</phase>
+						<phase>test</phase>
+						<!-- <phase>process-sources</phase> -->
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>internal.repo</id>
@@ -274,14 +276,14 @@
 		</site>
 
 	</distributionManagement>
-	
+
 	<dependencies>
-        <!-- TESTING DEPENDENCIES -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<!-- TESTING DEPENDENCIES -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

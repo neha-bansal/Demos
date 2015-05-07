@@ -2,11 +2,15 @@ package sample.plugin;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+
+import other.MyObject;
 
 /**
  * Says "Hi" to the user.
@@ -27,23 +31,40 @@ public class GreetingMojoWithMojo extends AbstractMojo
     /**
      * My Array.
      */
-    @Parameter
-    private int[] myArray;
+    @Parameter()
+    private Integer[] myArray;
     
-//    /**
-//     * My Map.
-//     */
-//    @Parameter
-//    private Map<String, String> myMap;
+    /**
+     * My Map.
+     */
+    @Parameter
+    private Map<String, Integer> myMap;
+    
+    /**
+     * My Properties.
+     */
+    @Parameter
+    private Properties myProperties;
+    
+    /**
+     * My Object.
+     */
+    @Parameter
+    private MyObject myObject;
 	
     public void execute() throws MojoExecutionException
     {
         getLog().info(greeting + " at " + date);
         for (int i=0; i< myArray.length; i++) {
-        	getLog().info(String.valueOf(myArray[i]));
+        	getLog().info(String.valueOf(Integer.valueOf(myArray[i])));
         }
-//        for (String key : myMap.keySet()) {
-//        	getLog().info(key + " " + myMap.get(key)); 
-//        }
+        for (String key : myMap.keySet()) {
+        	getLog().info(key + " " + myMap.get(key)); 
+        	getLog().info("" + Integer.valueOf(myMap.get(key)));
+        }
+        for (Entry<Object, Object> entry : myProperties.entrySet()) {
+        	getLog().info(entry.getKey() + ":" + entry.getValue());
+        }
+        getLog().info(myObject.getFirstField() + ":" + myObject.getClass().getPackage());
     }
 }
