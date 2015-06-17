@@ -1,5 +1,7 @@
 package org.infinispan.tutorial.embedded;
 
+import java.util.concurrent.TimeUnit;
+
 import org.infinispan.Cache;
 
 public abstract class CachingWeatherService implements WeatherService {
@@ -16,6 +18,7 @@ public abstract class CachingWeatherService implements WeatherService {
 		if (weather == null) {
 			weather = fetchWeather(location);
 			cache.put(location, weather);
+//			cache.put(location, weather, 5, TimeUnit.SECONDS);  //if all entries need to be expired with same lifespan, then cache can be configured by default to expire all the entries together.
 		}
 		return weather;
 	}

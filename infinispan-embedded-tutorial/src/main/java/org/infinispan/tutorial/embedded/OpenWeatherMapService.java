@@ -1,5 +1,7 @@
 package org.infinispan.tutorial.embedded;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -35,10 +37,17 @@ public class OpenWeatherMapService extends CachingWeatherService {
          conn = (HttpURLConnection) url.openConnection();
          conn.setRequestMethod("GET");
          conn.setRequestProperty("Accept", "application/xml");
-         //committing to get rid of the 307 response code issue.
-//         if (conn.getResponseCode() != 200) {
-//            throw new Exception();
-//         }
+         
+//         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+// 		String responseLine;
+// 		while ((responseLine = br.readLine()) != null) {
+// 			System.out.println(responseLine);
+// 		}
+ 		
+         //commenting to get rid of the 307 response code issue.
+         if (conn.getResponseCode() != 200) {
+            throw new Exception();
+         }
          return db.parse(conn.getInputStream());
       } catch (Exception e) {
          return null;
