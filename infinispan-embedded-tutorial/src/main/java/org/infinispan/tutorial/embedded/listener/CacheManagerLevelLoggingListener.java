@@ -1,4 +1,4 @@
-package org.infinispan.tutorial.embedded.filestore;
+package org.infinispan.tutorial.embedded.listener;
 
 import org.infinispan.commons.logging.Log;
 import org.infinispan.commons.logging.LogFactory;

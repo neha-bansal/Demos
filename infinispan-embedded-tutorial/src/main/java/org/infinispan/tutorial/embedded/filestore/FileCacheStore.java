@@ -8,6 +8,8 @@ import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.eviction.EvictionStrategy;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
+import org.infinispan.tutorial.embedded.listener.CacheLevelLoggingListener;
+import org.infinispan.tutorial.embedded.listener.CacheManagerLevelLoggingListener;
 
 public class FileCacheStore {
 

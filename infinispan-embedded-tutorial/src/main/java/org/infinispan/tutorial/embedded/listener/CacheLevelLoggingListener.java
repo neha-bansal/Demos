@@ -1,4 +1,4 @@
-package org.infinispan.tutorial.embedded.filestore;
+package org.infinispan.tutorial.embedded.listener;
 
 import java.util.Map.Entry;
 import java.util.Queue;
@@ -58,7 +58,7 @@ public class CacheLevelLoggingListener {
   @CacheEntryInvalidated
   @CacheEntryRemoved
   public void entryManipulated(CacheEntryEvent<?, ?> event) {
-	  if (!event.isPre()) // Message is only logged after operation succeeded
+	 if (!event.isPre()) // Message is only logged after operation succeeded
 		  log.infof("[Event %s] Cache entry %s manipulated in cache %s", event.getType(), event.getKey(), event.getCache());
   }
   

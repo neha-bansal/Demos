@@ -1,4 +1,4 @@
-package org.infinispan.tutorial.embedded;
+package org.infinispan.tutorial.embedded.weatherapp;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;

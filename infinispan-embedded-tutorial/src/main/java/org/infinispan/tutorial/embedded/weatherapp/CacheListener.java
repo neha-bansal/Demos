@@ -1,4 +1,4 @@
-package org.infinispan.tutorial.embedded;
+package org.infinispan.tutorial.embedded.weatherapp;
 
 import org.infinispan.notifications.Listener;
 import org.infinispan.notifications.cachelistener.annotation.CacheEntryCreated;
