@@ -15,7 +15,10 @@ public class FileCacheStore {
 
 public static void main(String args[]) throws Exception {
 	
-      EmbeddedCacheManager manager = new DefaultCacheManager();
+//      EmbeddedCacheManager manager = new DefaultCacheManager("infinispan.xml");
+      
+	  EmbeddedCacheManager manager = new DefaultCacheManager();
+      
       manager.addListener(new CacheManagerLevelLoggingListener()); 
       
       Configuration config = new ConfigurationBuilder()
@@ -40,7 +43,7 @@ public static void main(String args[]) throws Exception {
       
       // as per eviction strategy, cache can have only 2 entries, so rest are fetched from file store
       //cache.entrySet() returns a set view of the mappings contained in this cache and cache loader across the entire cluster
-      //it dioes not actually load the entry from cache loader to cache, so no eviction here.
+      //it does not actually load the entry from cache loader to cache, so no eviction here.
       //but if cache.get("key1"); is used, eviction will take place and some other key will be saved to file store to load key1 in cache.
       
       for (Entry<Object, Object> entry : cache.entrySet()) {

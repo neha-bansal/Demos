@@ -1,4 +1,3 @@
-
 package org.infinispan.tutorial.embedded.clustering;
 
 import java.io.IOException;
@@ -17,16 +16,16 @@ import org.infinispan.tutorial.embedded.listener.CacheLevelLoggingListener;
 import org.jboss.logging.BasicLogger;
 import org.jboss.logging.Logger;
 
-public class ReplicationDistributionDemo {
+public class ReplicationOrDistributionCache {
 
-   private static final BasicLogger log = Logger.getLogger(ReplicationDistributionDemo.class);
+   private static final BasicLogger log = Logger.getLogger(ReplicationOrDistributionCache.class);
 
    private final boolean useXmlConfig;
    private final String cacheName;
    private final String nodeName;
    private volatile boolean stop = false;
 
-   public ReplicationDistributionDemo(boolean useXmlConfig, String cacheName, String nodeName) {
+   public ReplicationOrDistributionCache(boolean useXmlConfig, String cacheName, String nodeName) {
       this.useXmlConfig = useXmlConfig;
       this.cacheName = cacheName;
       this.nodeName = nodeName;
@@ -56,7 +55,7 @@ public class ReplicationDistributionDemo {
                break;
          }
       }
-      new ReplicationDistributionDemo(useXmlConfig, cache, nodeName).run();
+      new ReplicationOrDistributionCache(useXmlConfig, cache, nodeName).run();
    }
    
    public void run() throws IOException, InterruptedException {
@@ -134,7 +133,7 @@ public class ReplicationDistributionDemo {
       System.out.println("Starting a cache manager with a programmatic configuration");
       DefaultCacheManager cacheManager = new DefaultCacheManager(
             GlobalConfigurationBuilder.defaultClusteredBuilder()
-                  .transport().nodeName(nodeName).addProperty("configurationFile", "jgroups.xml")
+                  .transport().nodeName(nodeName).addProperty("configurationFile", "default-configs/default-jgroups-udp.xml")
                   .build(),
             new ConfigurationBuilder()
                   .clustering()
