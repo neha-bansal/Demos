@@ -27,7 +27,8 @@ public static void main(String args[]) throws Exception {
 							      .passivation(true)
 							      .addSingleFileStore()
 							      	//.maxEntries(10)
-							      	.location("./target/myDataStore")
+							      	.location("./target/myDataStore") 
+							      	.purgeOnStartup(true)				//file store gets cleared on startup
 							      .build();
       
       manager.defineConfiguration("file-store-cache", config);
