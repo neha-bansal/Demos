@@ -82,7 +82,7 @@ public class ReplicationOrDistributionCache {
                counter++;
 
                try {
-                  Thread.sleep(15000);
+                  Thread.sleep(5000);
                } catch (InterruptedException e) {
                   break;
                }

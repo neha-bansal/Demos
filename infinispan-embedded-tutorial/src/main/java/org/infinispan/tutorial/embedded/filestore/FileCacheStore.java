@@ -13,6 +13,7 @@ import org.infinispan.tutorial.embedded.listener.CacheManagerLevelLoggingListene
 
 public class FileCacheStore {
 
+@SuppressWarnings("deprecation")
 public static void main(String args[]) throws Exception {
 	
 //      EmbeddedCacheManager manager = new DefaultCacheManager("infinispan.xml");
