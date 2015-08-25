@@ -185,7 +185,7 @@
 				<artifactId>hello-maven-plugin</artifactId>
 				<version>1.0-SNAPSHOT</version>
 				<configuration>
-					<greeting>mujhe kaam milne wala hai... to main kya karun</greeting>
+					<greeting>Hello maven plugin demo</greeting>
 					<!-- <outputDirectory>site/</outputDirectory> <myArray> <Integer>122</Integer> 
 						<Integer>333</Integer> </myArray> <myMap> <firstName>11</firstName> <lastName>33</lastName> 
 						</myMap> <myProperties> <property> <name>fruit</name> <value>healthy</value> 
@@ -284,20 +284,52 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>1.3.1</version>
+				<version>1.4</version>
+				<dependencies>
+					<dependency>
+						<groupId>sample.enforcer.rule</groupId>
+						<artifactId>custom-rule</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<rules>
+						<!-- <bannedPlugins> will only display a warning but does not fail 
+							the build. <level>ERROR</level> <excludes> <exclude>org.apache.maven.plugins:maven-clean-plugin</exclude> 
+							</excludes> <message>Please consider using the maven-invoker-plugin (http://maven.apache.org/plugins/maven-invoker-plugin/)!</message> 
+							</bannedPlugins> -->
+						<myCustomRule implementation="sample.enforcer.rule.MyCustomRule">
+							<shouldIFail>true</shouldIFail>
+						</myCustomRule>
+						<!-- <requireJavaVersion>
+							<version>1.7</version>
+							<message>java 1.7 is required</message>
+							<level>WARN</level>
+						</requireJavaVersion>
+						<requireActiveProfile>
+							<profiles>securecentral,test</profiles>
+							<all>false</all>
+						</requireActiveProfile>
+						<requireNoRepositories>
+							<message>Best Practice is to never define repositories in pom.xml
+								(use a repository manager instead)</message>
+						</requireNoRepositories>
+						<requireProperty>
+							<property>basedir.alll</property>
+							<message>You must set a basedir property!</message>
+							<regex>.*\d.*</regex>
+							<regexMessage>The basedir property must contain at least one
+								digit.</regexMessage>
+						</requireProperty> -->
+					</rules>
+					<!-- <fail>true</fail> <failFast>true</failFast> -->
+				</configuration>
 				<executions>
 					<execution>
 						<id>enforce-versions</id>
 						<goals>
 							<goal>enforce</goal>
 						</goals>
-						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>1.6</version>
-								</requireJavaVersion>
-							</rules>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AppTest {
+public class App1Test {
 
 	
 	@Before
@@ -15,24 +15,16 @@ public class AppTest {
 	}
 	
 	@Test
-	public void testmethod() {
-		System.out.println("testmethod Demo test class for maven build tool");
+	public void testmethod3() {
+		System.out.println("testmethod3 Demo test class for maven build tool");
 		Assert.assertEquals(true, true ); 
 		
 		org.junit.Assert.assertEquals("test failed...", true, true);
 	}
 	
 	@Test
-	public void testmethod2() {
-		System.out.println("testmethod2 Demo test class for maven build tool");
-		Assert.assertEquals(true, true ); 
-		
-		org.junit.Assert.assertEquals("test failed...", true, true);
-	}
-	
-	@Test
-	public void testmethod5() {
-		System.out.println("testmethod5 Demo test class for maven build tool");
+	public void testmethod4() {
+		System.out.println("testmethod4 Demo test class for maven build tool");
 		Assert.assertEquals(true, true ); 
 		
 		org.junit.Assert.assertEquals("test failed...", true, true);
