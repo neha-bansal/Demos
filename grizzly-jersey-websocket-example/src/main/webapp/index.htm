@@ -1,0 +1,35 @@
+<!DOCTYPE >
+<html >
+<head>
+<title>Insert title here</title>
+<script type="text/javascript">
+function getResponse() {
+	var xhr = new XMLHttpRequest();
+	var url = document.getElementById("restUrl").value;
+	xhr.onload = function() { 
+		document.getElementById("myDiv").innerHTML = xhr.responseText;
+		}
+	xhr.onreadystatechange = function () {
+	    if ((xhr.readyState === 4) && (xhr.status === 200)) {
+	    	//alert("PROGRESS completed");
+	    	document.getElementById("myDiv").innerHTML = xhr.responseText;
+	    }
+	};
+	xhr.open("GET", url, true);
+	//xhr.setRequestHeader("domain-url", url);
+	//xhr.open("GET", url, false);
+	//xhr.setRequestHeader("Accept", "application/json");
+	xhr.send();
+}
+
+</script>
+</head>
+<body>
+
+Enter url : <input type="text" id="restUrl" value="" />
+<input type="submit" name="Response from saim domain" value="Response from saim domain" onclick="getResponse()"/><br/><br/>
+
+<div id="myDiv"></div>
+
+</body>
+</html>

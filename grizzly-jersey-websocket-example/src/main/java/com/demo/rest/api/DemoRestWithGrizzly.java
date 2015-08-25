@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 
-import org.codehaus.jackson.jaxrs.JsonMappingExceptionMapper;
-import org.codehaus.jackson.jaxrs.JsonParseExceptionMapper;
+
+//import org.codehaus.jackson.jaxrs.JsonMappingExceptionMapper;
+//import org.codehaus.jackson.jaxrs.JsonParseExceptionMapper;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.grizzly.websockets.WebSocketAddOn;
 import org.glassfish.grizzly.websockets.WebSocketApplication;
 import org.glassfish.grizzly.websockets.WebSocketEngine;
@@ -43,10 +45,12 @@ public class DemoRestWithGrizzly {
 		URI uri = URI.create("http://localhost:1111/");
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config, false);
 		
+		
 		server.getListener("grizzly").registerAddOn(new WebSocketAddOn());
 		IndicationApplication app = new IndicationApplication();
 		WebSocketEngine.getEngine().register("/websocket", "/indication", app);
 		
+		//server.getServerConfiguration().addHttpHandler(new StaticHttpHandler("src/main/webapp/"), "/static");
 		try {
 			server.start();
 			
