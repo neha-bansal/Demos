@@ -23,7 +23,7 @@ public class HelloWorldResource {
 	
 	@GET
 	@Path("{list}")
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Produces({MediaType.APPLICATION_JSON})
 	public List<HelloWorldDTO> msg () 
 	{
 		List<HelloWorldDTO> helloWorldDTOList = new ArrayList<HelloWorldDTO>();

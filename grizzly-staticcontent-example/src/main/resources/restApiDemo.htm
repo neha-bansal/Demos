@@ -1,0 +1,96 @@
+<!-- Proxy servlet demo for the cross domain data access -->
+
+<!DOCTYPE >
+<html>
+<head>
+<title>Rest API Demo</title>
+<script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	var userName;
+	var testGroupName;
+	var url = "http://10.160.161.26:12000/";
+	
+	$("input[type=text]").blur(function() {
+		userName = $("#userName").val();
+		testGroupName = $("#testGroupName").val();
+		alert(userName + ":" + testGroupName);
+		if (this.id == "userName") {
+			url += userName + "/testGroups";
+			alert(url);
+		}
+	});
+	
+	$("#startTest").click(function() {
+		url += "/start/" + testGroupName;
+		alert(url);
+		$.ajax({
+			type: "GET",
+			url: url,
+			dataType: "json",
+			success: function(response) {
+				alert("completed: " + response);
+			},
+			error: function(xhr){
+	            alert("An error occured: " + xhr.status + " " + xhr.statusText);
+	        }
+		});
+	});
+	
+	/* $("#stopTest").click(function() {
+		url += "/stop/" + testGroupName;
+	});
+	
+	$("#listAllTest").click(function() {
+		
+	});
+	
+	$("#listOneTest").click(function() {
+		url += testGroupName;
+	});
+	
+	$("#deleteTest").click(function() {
+		url += testGroupName;
+	}); */
+});
+
+</script>
+</head>
+<body>
+	<table>
+		<tbody>
+			<tr>
+				<td>User Name :</td>
+				<td><input type="text" name="userName" id="userName" /><br /></td>
+			</tr>
+			<tr>
+				<td>Test Group Name :</td>
+				<td><input type="text" name="testGroupName" id="testGroupName" />
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<br />
+	<input type="submit" name="startTest" id="startTest" value="Start Test" />
+	<input type="submit" name="stopTest" id="stopTest" value="Stop Test" />
+	<br />
+	<br />
+	<input type="submit" name="listAllTest" id="listAllTest" value="list All Tests" />
+	<input type="submit" name="listOneTest" id="listOneTest" value="List One Test" />
+	<br />
+	<br />
+	<input type="submit" name="deleteTest" id="deleteTest" value="Delete Test" />
+
+	<div id="myDiv"></div>
+
+	<div id="missing-sockets" style="display: none;">Your browser does not support websockets.</div>
+
+</body>
+</html>
+
+
+

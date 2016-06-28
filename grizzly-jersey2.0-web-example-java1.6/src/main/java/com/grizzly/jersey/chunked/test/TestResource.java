@@ -65,13 +65,20 @@ public class TestResource {
 
 	private static final Logger LOGGER = Logger.getLogger(TestResource.class.getName());
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String message () 
+	{
+		return "hello world!!!";
+	}
+	
 	/**
 	 * Get chunk stream of JSON data - from JSON POJOs.
 	 * 
 	 * @return chunk stream.
 	 */
 	@GET
-	// @Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("async")
 	public ChunkedOutput<String> getFromPojo() {
 		final ChunkedOutput<String> output = new ChunkedOutput<String>(String.class);
@@ -108,7 +115,7 @@ public class TestResource {
 	 * @return chunk stream.
 	 */
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	@Path("from-string")
 	public ChunkedOutput<String> getFromText() {
 		final ChunkedOutput<String> output = new ChunkedOutput<String>(String.class);

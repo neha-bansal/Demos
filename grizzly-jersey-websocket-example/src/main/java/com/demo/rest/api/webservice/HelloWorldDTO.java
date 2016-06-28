@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //these annotations are used for generating the rest output in xml format.
-//@XmlRootElement(name="HelloWorldDTO")
-//@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="HelloWorldDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class HelloWorldDTO {
 
 	private String msg;

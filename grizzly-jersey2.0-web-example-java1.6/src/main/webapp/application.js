@@ -4,7 +4,7 @@ var websocket = null;
 var app = {
     //url: 'ws://localhost:2222/grizzly-websockets-chat/chat',
     //url: 'ws://localhost:1111/websocket/indication',
-    url: 'ws://10.160.161.108:12001/websocket/indication',
+    url: 'ws://10.160.161.26:12001/websocket/indication',
     
     initialize: function() {
         if ("WebSocket" in window || "MozWebSocket" in window) {
